@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+
+	<div class="container py-4">
+
+		<div class="card bg-white border-info table-responsive" >
+			<div class="card-header border-info" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+			
+				<form th:action="@{/sendFecha}" >
+					<div class="form-group row">
+						<label for="fechaIn" class="col-sm-1 col-form-label">Desde: </label>
+						<div class="col-sm-2">
+							<input id="fechaIn" th:value="${fechaIn}" type="text" th:name="fechaIn" class="form-control" /> 
+						</div>
+						<label for="fechaFn" class="col-sm-1 col-form-label">Hasta: </label>
+						<div class="col-sm-2">
+							<input id="fechaFn" th:value="${fechaIn}" type="text" th:name="fechaFn" class="form-control" /> 
+						</div>
+						<div class="col-sm-1">
+							<input type="submit"  value="Send" class="btn btn-outline-success" />
+						</div>
+						<div class="col-sm-2">
+							<a class="btn btn-outline-primary" th:href="@{/listadoFecha}">Ver Reporte</a>
+						</div>
+					</div>
+				
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="prestamo/js/table-prestamo :: javascriptTable"></script>
+	<script>
+      $(function () {
+          $("#fechaIn").datepicker({dateFormat: 'yy-mm-dd'});
+          $("#fechaFn").datepicker({dateFormat: 'yy-mm-dd'});
+        }
+      );
+    </script>
+
+</body>
+</html>

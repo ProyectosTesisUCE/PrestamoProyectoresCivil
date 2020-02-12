@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<script type="text/javascript" th:fragment="javascriptGraficoProy">
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-proyectoresg",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].alta);
+		        value.push(data[i].numprestamo);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Proyectores',
+		            backgroundColor: coloR,
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#pieProy");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'pie',
+		        data: chartdata,
+		        options: {
+				      title: {
+				        display: true,
+				        text: 'Número de préstamos por proyector'
+				      }
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+
+    </script>
+
+	<script type="text/javascript" th:fragment="javascriptGraficoMat">
+	
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-materiasg",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].nombre);
+		        value.push(data[i].numprestamo);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Núm. Prestamos',
+		            backgroundColor: coloR,
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#doughnutMat");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'doughnut',
+		        data: chartdata,
+		        options: {
+				    title: {
+				        display: true,
+				        text: 'Número de prestamos por Materia'
+				      }
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+	
+	</script>
+	
+	<script type="text/javascript" th:fragment="javascriptGraficoEst">
+	
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-estudiantesg",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].apellido);
+		        value.push(data[i].numprestamo);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Núm. Prestamos',
+		            backgroundColor: coloR,
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#horizontalBarEst");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'horizontalBar',
+		        data: chartdata,
+		        options: {
+		        	legend: { display: false },
+				    title: {
+				        display: true,
+				        text: 'Número de préstamos por estudiante'
+				      },
+				      scales: {
+					    	 xAxes: [{
+					    		 scaleLabel: {
+							    	 display: true,
+							    	 labelString: 'Eje X (Num. Prestamos)',
+							    	 fontStyle:'oblique'
+							     }
+					    	 }],
+					    	 yAxes: [{
+					    		 scaleLabel: {
+							    	 display: true,
+							    	 labelString: 'Eje Y (Apellido Est.)',
+							    	 fontStyle:'oblique'
+							     }
+					    	 }]
+					      }	
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+	
+	</script>
+	
+	<script type="text/javascript" th:fragment="javascriptGraficoProf">
+	
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-profesoresg",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].apellido);
+		        value.push(data[i].numprestamo);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Núm. Prestamos',
+		            backgroundColor: coloR,
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#barProf");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'bar',
+		        data: chartdata,
+		        options: {
+		        	legend: { display: false },
+		        	scales: {
+		        		xAxes: [{
+				    		 scaleLabel: {
+						    	 display: true,
+						    	 labelString: 'Eje X (Apellido Doc.)',
+						    	 fontStyle:'oblique'
+						     }
+				    	 }],
+		                yAxes: [{
+		                    ticks: {
+		                        beginAtZero: true,
+// 		                        stepSize: 1
+		                    },
+		                    scaleLabel: {
+						    	 display: true,
+						    	 labelString: 'Eje Y (Num. Prestamos)',
+						    	 fontStyle:'oblique'
+						     }
+		                }]
+		            },
+				    title: {
+				        display: true,
+				        text: 'Número de préstamos por docente'
+				      }
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+	
+	</script>
+	
+	<script type="text/javascript" th:fragment="javascriptGraficoProyDate">
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-proyectoresg1",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].presAlta);
+		        value.push(data[i].presNum);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Proyectores',
+		            backgroundColor: coloR,
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#pieProy");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'pie',
+		        data: chartdata,
+		        options: {
+				      title: {
+				        display: true,
+				        text: 'Número de préstamos por proyector'
+				      }
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+
+    </script>
+    
+    <script type="text/javascript" th:fragment="javascriptGraficoMatDate">
+	
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-materiasg1",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].presNombre);
+		        value.push(data[i].presNum);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Núm. Prestamos',
+		            backgroundColor: coloR,
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#doughnutMat");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'doughnut',
+		        data: chartdata,
+		        options: {
+				    title: {
+				        display: true,
+				        text: 'Número de préstamos por materia'
+				      }
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+	
+	</script>
+    
+    <script type="text/javascript" th:fragment="javascriptGraficoEstDate">
+	
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-estudiantesg1",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].presApellido);
+		        value.push(data[i].presNum);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Núm. Prestamos',
+		            backgroundColor: coloR,
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#horizontalBarEst");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'horizontalBar',
+		        data: chartdata,
+		        options: {
+		        	legend: { display: false },
+				    title: {
+				        display: true,
+					    text: 'Número de préstamos por estudiante'
+				      },
+				      scales: {
+					    	 xAxes: [{
+					    		 scaleLabel: {
+							    	 display: true,
+							    	 labelString: 'Eje X (Num. Prestamos)',
+							    	 fontStyle:'oblique'
+							     }
+					    	 }],
+					    	 yAxes: [{
+					    		 scaleLabel: {
+							    	 display: true,
+							    	 labelString: 'Eje Y (Apellido Est.)',
+							    	 fontStyle:'oblique'
+							     }
+					    	 }]
+					      }	
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+	
+	</script>
+	
+	<script type="text/javascript" th:fragment="javascriptGraficoProfDate">
+	
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-profesoresg1",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].presApellido);
+		        value.push(data[i].presNum);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Núm. Prestamos',
+		            backgroundColor: coloR,
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#barProf");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'bar',
+		        data: chartdata,
+		        options: {
+		        	legend: { display: false },
+		        	scales: {
+		        		xAxes: [{
+				    		 scaleLabel: {
+						    	 display: true,
+						    	 labelString: 'Eje X (Apellido Doc.)',
+						    	 fontStyle:'oblique'
+						     }
+				    	 }],
+		                yAxes: [{
+		                    ticks: {
+		                        beginAtZero: true,
+//		                        stepSize: 1
+		                    },
+		                    scaleLabel: {
+						    	 display: true,
+						    	 labelString: 'Eje Y (Num. Prestamos)',
+						    	 fontStyle:'oblique'
+						     }
+		                }]
+		            },
+				    title: {
+				        display: true,
+				        text: 'Número de préstamos por docente'
+				      }
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+	
+	</script>
+	
+	<script type="text/javascript" th:fragment="javascriptGraficoProyHours">
+	
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-proyectoresg",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].alta);
+		        value.push(data[i].numhours);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Horas de uso',
+		            backgroundColor: coloR,
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#horizontalBarProyHours");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'horizontalBar',
+		        data: chartdata,
+		        options: {
+		        	legend: { display: false },
+				    title: {
+				        display: true,
+				        text: 'Horas de uso de Proyector'
+				      },
+				     scales: {
+				    	 xAxes: [{
+				    		 scaleLabel: {
+						    	 display: true,
+						    	 labelString: 'Eje X (horas)',
+						    	 fontStyle:'oblique'
+						     }
+				    	 }],
+				    	 yAxes: [{
+				    		 scaleLabel: {
+						    	 display: true,
+						    	 labelString: 'Eje Y (Alta Proy.)',
+						    	 fontStyle:'oblique'
+						     }
+				    	 }]
+				      }				     
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+	
+	</script>
+	
+	<script type="text/javascript" th:fragment="javascriptGraficoProyEstatus">
+	
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-estatusproyg",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+
+		      for(var i in data) {
+		        id.push(data[i].estatusProy);
+		        value.push(data[i].countEstatus);
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Count',
+		            backgroundColor: ["#00913f","#cb3234"],
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#doughnutProyEstatus");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'doughnut',
+		        data: chartdata,
+		        options: {
+				    title: {
+				        display: true,
+				        text: 'Estatus de proyector'
+				      }
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+	
+	</script>
+    	
+</body>
+</html>

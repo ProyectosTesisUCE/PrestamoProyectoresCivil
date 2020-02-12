@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+
+				<form th:action="@{/profesor/form}" th:object="${profesor}" 
+					method="post" >
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Nombres</label>
+						<div class="col-sm-5">
+							<input type="text" th:field="*{nombre}" class="form-control" placeholder="e.g. Juan Daniel"
+								pattern="^[a-zA-ZÑñáéíóúÁÉÍÓÚ ]*$"
+								title="Debe insertar el nombre en el formato indicado. e.g. Juan Daniel"
+								th:errorclass="'form-control alert-danger'" required/> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Apellidos</label>
+						<div class="col-sm-5">
+							<input type="text" th:field="*{apellido}" class="form-control" placeholder="e.g. Ruiz Alvear"
+								pattern="^[A-ZÑÁÉÍÓÚ]{1}[a-zñáéíóú]*\s[A-ZÑÁÉÍÓÚ]{1}[a-zñáéíóú ]*$"
+								title="Debe insertar los dos apellidos en el formato indicado. e.g. Ruiz Alvear"
+								th:errorclass="'form-control alert-danger'" required/> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Email</label>
+						<div class="col-sm-5">
+							<input type="email" th:field="*{email}" class="form-control" placeholder="e.g. jperez@xxxx.com"
+								title="La dirección de correo es requerida. Debe ingresar un email válido."
+								th:errorclass="'form-control alert-danger'" required/> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Cédula</label>
+						<div class="col-sm-2">
+							<input type="text" name="cedula" id="cedula" th:field="*{cedula}" class="form-control" 
+								pattern="^[0-9]{10}$"
+								title="La cédula es requerida. Debe insertar solo números."
+								th:errorclass="'form-control alert-danger'" maxlength="10"  onblur="validarDocumento()" required/> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"></small>
+
+						</div>
+					</div>
+					
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Guardar" class="btn btn-outline-success" />
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="prestamo/js/verificar-cedula :: javascriptCedula"></script>
+
+</body>
+</html>

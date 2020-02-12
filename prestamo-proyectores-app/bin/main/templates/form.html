@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+
+				<form th:action="@{/form}" th:object="${prestamo}" 
+					method="post" >
+					
+					
+					<div class="form-group row">
+						<label for="buscar_registro" class="col-sm-2 col-form-label" th:text="'Buscar Carta Comp.'"></label>
+						<div class="col-sm-5">
+							<input type="text" name="buscar_registro" id="buscar_registro" class="form-control" placeholder="Estudiante - Profesor" 
+							       title="Debe seleccionar una carta de compromiso." required/>
+						</div>
+						<div class="col-sm-2">
+							<textarea name="registro_horario" id="registro_horario" class="form-control" ></textarea>
+						</div>
+						<div class="col-sm-1">
+							<input type="hidden" name="buscar_registro_id" id="buscar_registro_id" class="form-control" />
+						</div>
+						<div class="col-sm-2">
+							<input type="hidden" name="registro_emailEs" id="registro_emailEs" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="buscar_proyector" class="col-sm-2 col-form-label" th:text="'Proyector'"></label>
+						<div class="col-sm-5">
+							<input type="text" name="buscar_proyector" id="buscar_proyector" class="form-control" placeholder="Alta proyector" 
+							       title="Debe seleccionar un proyector por su alta." required/>
+						</div>
+						<div class="col-sm-2">
+							<input type="hidden" name="buscar_proyector_id" id="buscar_proyector_id" class="form-control" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label for="aula" class="col-sm-2 col-form-label">Aula</label>
+						<div class="col-sm-5">
+							<input type="text" th:field="*{aula}" class="form-control"
+							title="El campo de aula es requerido"
+							th:errorclass="'form-control alert-danger'" required/> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('aula')}" th:errors="*{aula}"></small>
+						</div>
+					</div>
+						
+					<div class="form-group row">
+						<label for="accesorios" class="col-sm-2 col-form-label">Accesorios</label>
+						<div class="col-sm-1 form-check-inline ">
+							 <input type="checkbox" class="form-check-input" name="cableH" id="cableH" value="HDMI">
+    						 <label class="form-check-label" for="cableH">HDMI</label>
+						</div>
+						<div class="col-sm-1 form-check-inline ">
+							 <input type="checkbox" class="form-check-input" name="parlante" id="parlante" value="Parlantes" >
+    						 <label class="form-check-label" for="parlante">Parlantes</label>
+						</div>
+						<div class="col-sm-1 form-check-inline">
+							 <input type="checkbox" class="form-check-input" name="extension" id="extension" value="Ext.">
+    						 <label class="form-check-label" for="extension">Extension</label>
+						</div>
+						<div class="col-sm-1 form-check-inline">
+							 <input type="checkbox" class="form-check-input" name="regleta" id="regleta" value="Regleta">
+    						 <label class="form-check-label" for="regleta">Regleta</label>
+						</div>
+						<div class="col-sm-1 form-check-inline">
+							 <input type="checkbox" class="form-check-input" name="puntero" id="puntero" value="Puntero">
+    						 <label class="form-check-label" for="puntero">Puntero</label>
+						</div>
+					</div>
+					
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Guardar" class="btn btn-outline-success" />
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="prestamo/js/autocomplete-prestamo :: javascript"></script>
+</body>
+</html>

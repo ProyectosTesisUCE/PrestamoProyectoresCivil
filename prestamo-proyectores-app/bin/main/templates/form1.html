@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+
+				<form th:action="@{/form1}" th:object="${prestamo}" 
+					method="post" >
+					
+					<div class="form-group row">
+						<div class="col-sm-3">
+							<input type="hidden" th:value="${idPro}" name="idPro" id="idPro"class="form-control" />
+						</div>
+						<div class="col-sm-3">
+							<input type="hidden" th:value="${idPre}" name="idPre" id="idPre"class="form-control" />
+						</div>
+					</div>
+									
+					<div class="form-group row">
+						<label for="aula" class="col-sm-2 col-form-label">Aula</label>
+						<div class="col-sm-5">
+							<input type="text" th:field="*{aula}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('aula')}" th:errors="*{aula}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="fechaPr" class="col-sm-2 col-form-label">Fecha</label>
+						<div class="col-sm-5">
+							<input id="fechaPr" type="text" th:field="*{createPr}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('createPr')}" th:errors="*{createPr}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="horaIn" class="col-sm-2 col-form-label">Hora Inicio</label>
+						<div class="col-sm-5">
+							<input id="horaIn" type="text" th:field="*{horaIn}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('horaIn')}" th:errors="*{horaIn}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="horaFn" class="col-sm-2 col-form-label">Hora Fin</label>
+						<div class="col-sm-5">
+							<input id="horaFn" name="horaFn" type="text" th:field="*{horaFn}" class="form-control" required
+							th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('horaFn')}" th:errors="*{horaFn}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="observacion" class="col-sm-2 col-form-label" th:text="'Observación'"></label>
+						<div class="col-sm-5">
+							<textarea th:field="*{observacion}" class="form-control" ></textarea>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Terminar" class="btn btn-outline-success" />
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="prestamo/js/autocomplete-prestamo :: javascript"></script>
+	<script>
+      $(function () {
+          $("#fechaPr").datepicker({dateFormat: 'dd-mm-yy'});
+        }
+      );
+      var input = $('#horaIn').clockpicker({
+    	    placement: 'bottom',
+    	    align: 'left',
+//     	    autoclose: true,
+    	    donetext: 'Done'
+    	});	
+      var input = $('#horaFn').clockpicker({
+  	    placement: 'bottom',
+  	    align: 'left',
+//   	    autoclose: true,
+  	    'default': 'now',
+  	 	donetext: 'Done'
+  	});	
+    </script>
+
+</body>
+</html>

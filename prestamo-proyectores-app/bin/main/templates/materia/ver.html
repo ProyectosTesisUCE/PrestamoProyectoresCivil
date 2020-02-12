@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> -->
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+
+				<ul class="list-group">
+					<li class="list-group-item list-group-item-primary " th:text="'Nombre: ' + ${materia.nombre}"></li>
+					<li class="list-group-item" th:text="'Codigo: ' + ${materia.codigo}"></li>
+					<li class="list-group-item" th:text="'Creditos: ' + ${materia.creditos}"></li>
+					<li class="list-group-item" >
+						<div th:switch="${materia.semestre}">
+							<span th:case="1"  >Semestre: Primero</span>
+							<span th:case="2"  >Semestre: Segundo</span>
+							<span th:case="3"  >Semestre: Tercero</span>
+							<span th:case="4"  >Semestre: Cuarto</span>
+							<span th:case="5"  >Semestre: Quinto</span>
+							<span th:case="6"  >Semestre: Sexto</span>
+							<span th:case="7"  >Semestre: Septimo</span>
+							<span th:case="8"  >Semestre: Octavo</span>
+						</div>						
+					</li>
+					<li class="list-group-item" th:text="'Paralelo: ' + ${materia.paralelo}"></li>
+
+				</ul>
+
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> -->
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<a th:href="@{/listadoFecha }" class="btn btn-light btn-xs">&laquo;
+						Regresar</a> 
+				</h4>
+
+
+				<ul class="list-group my-2">
+					<li class="list-group-item list-group-item-primary "
+						th:text="'Estudiante: ' + ${prestamo.registro.estudiante.apellido} +' - '+ 'Profesor: ' + ${prestamo.registro.profesor.apellido}"></li>
+					<li class="list-group-item"
+						th:text="'Alta Proyector: ' + ${prestamo.proyector.alta}"></li>
+					<li class="list-group-item"
+						th:text="'Fecha de Préstamo: ' + ${#dates.format(prestamo.createPr, 'dd-MM-yyyy')}"></li>						
+						<li class="list-group-item"
+						th:text="'Profesor: ' + ${prestamo.registro.profesor.apellido} +' '+ ${prestamo.registro.profesor.nombre}"></li>
+					<li class="list-group-item"
+						th:text="'Estudiante: ' + ${prestamo.registro.estudiante.apellido} +' '+ ${prestamo.registro.estudiante.nombre}"></li>
+					<li class="list-group-item"
+						th:text="'Materia: ' + ${prestamo.registro.materia.nombre}"></li>
+					<li class="list-group-item"
+						th:text="'Semestre: ' + ${prestamo.registro.materia.semestre}"></li>
+					<li class="list-group-item"
+						th:text="'Paralelo: ' + ${prestamo.registro.materia.paralelo}"></li>
+					<li class="list-group-item"
+						th:text="'Aula: ' + ${prestamo.aula}"></li>
+					<li class="list-group-item"
+						th:text="'Hora Inicio: ' + ${prestamo.HoraIn}"></li>
+					<li class="list-group-item"
+						th:text="'Hora Fin: ' + ${prestamo.HoraFn}"></li>
+
+					<li class="list-group-item">
+						<span th:if="${prestamo.estado == 'Terminado'}"  class="badge badge-success">Terminado</span>
+						<span th:unless="${prestamo.estado == 'Terminado'}"  class="badge badge-danger" >Activo</span>
+					</li>
+				</ul>
+				
+				<div class="card border-info mb-4" style="max-width: 20rem;">
+					<div class="card-header">Observaciones</div>
+					<div class="card-body">
+						<p class="card-text" th:text="${prestamo.observacion}"
+							th:if="${not #strings.isEmpty(prestamo.observacion)}"></p>
+						<h4 class="card-title"
+							th:if="${#strings.isEmpty(prestamo.observacion)}"
+							th:text="'No tiene observaciones'"></h4>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+
+				<form th:action="@{/proyector/form}" th:object="${proyector}" 
+					method="post" enctype="multipart/form-data">
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Alta</label>
+						<div class="col-sm-4">
+							<input type="text" th:field="*{alta}" class="form-control"
+								title="El alta del proyector es requerida."																							
+								th:errorclass="'form-control alert-danger'" required/> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('alta')}" th:errors="*{alta}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Marca</label>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio1"> <input
+								type="radio" th:field="*{marca}" class="form-check-input"
+								id="radio1" name="m1" value="SONY" required>Sony
+							</label>
+							<div class="invalid-feedback">La marca es requerida</div>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio2"> <input
+								type="radio" th:field="*{marca}" class="form-check-input"
+								id="radio2" name="m2" value="EPSON" required>Epson
+							</label>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio3"> <input
+								type="radio" th:field="*{marca}" class="form-check-input"
+								id="radio3" name="m3" value="INFOCUS" required>Infocus
+							</label>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio4"> <input
+								type="radio" th:field="*{marca}" class="form-check-input"
+								id="radio4" name="m4" value=" " required>N/A
+							</label>
+						</div>
+
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Modelo</label>
+						<div class="col-sm-4">
+							<input type="text" th:field="*{modelo}" class="form-control"
+								title="El modelo del proyector es requerido."	
+								th:errorclass="'form-control alert-danger'" required/> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Serie</label>
+						<div class="col-sm-4">
+							<input type="text" th:field="*{serie}" class="form-control"
+								title="La serie del proyector es requerida."	
+								th:errorclass="'form-control alert-danger'" required/> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('serie')}" th:errors="*{serie}"></small>
+
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Color</label>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio1"> <input
+								type="radio" th:field="*{color}" class="form-check-input"
+								id="radio1" name="c1" value="BLANCO" required>Blanco
+							</label>
+							<div class="invalid-feedback">El color es requerido</div>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio2"> <input
+								type="radio" th:field="*{color}" class="form-check-input"
+								id="radio2" name="c2" value="NEGRO" required>Negro
+							</label>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio3"> <input
+								type="radio" th:field="*{color}" class="form-check-input"
+								id="radio3" name="c3" value="BEIGE" required>Beige
+							</label>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio4"> <input
+								type="radio" th:field="*{color}" class="form-check-input"
+								id="radio4" name="c4" value=" " required>N/A
+							</label>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label for="file" class="col-sm-2 col-form-label">Imagen</label>
+						<div class="col-sm-4">
+							<input type="file" name="file" class="form-control" /> 
+							
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Estatus</label>
+						<div class="col-sm-4">
+						<select th:field="*{estatus}" class="form-control" 
+						title="El estatus del proyector es requerido."	 required>
+<!-- 							<option value="0" disabled>Seleccione</option> -->
+							<option value="Disponible">Disponible</option>
+							<option value="Ocupado">Ocupado</option>
+						</select>
+						<div class="invalid-feedback">El estatus es requerido</div>				
+						</div>
+					</div>
+					
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Guardar" class="btn btn-outline-success" />
+						</div>
+					</div>
+
+<!-- 					<input type="hidden" th:field="*{id}" /> -->
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

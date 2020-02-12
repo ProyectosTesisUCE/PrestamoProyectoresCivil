@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> -->
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+
+				<img th:if="${proyector.foto!=null and #strings.length(proyector.foto) > 0}"
+					class="img-thumbnail rounded float-left" style="max-width: 25%;"
+					th:src="@{'/proyector/uploads/' + ${proyector.foto}}"
+					th:alt="${proyector.foto}" />
+
+				<ul class="list-group">
+					<li class="list-group-item list-group-item-primary " th:text="'Alta: ' + ${proyector.alta}"></li>
+					<li class="list-group-item" th:text="'Marca: ' + ${proyector.marca}"></li>
+					<li class="list-group-item" th:text="'Modelo: ' + ${proyector.modelo}"></li>
+					<li class="list-group-item" th:text="'Serie: ' + ${proyector.serie}"></li>
+					<li class="list-group-item" th:text="'Color: ' + ${proyector.color}"></li>
+					<li class="list-group-item" >
+						<span th:if="${proyector.estatus == 'Disponible'}"  class="badge badge-success">Disponible</span>
+						<span th:unless="${proyector.estatus == 'Disponible'}"  class="badge badge-danger" >Ocupado</span>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

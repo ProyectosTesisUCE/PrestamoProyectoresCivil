@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+
+				<form th:action="@{/registro/form}" th:object="${registro}" 
+					method="post" >
+					
+					
+					<div class="form-group row">
+						<label for="buscar_estudiante" class="col-sm-2 col-form-label" th:text="'Buscar Estudiante'"></label>
+						<div class="col-sm-5">
+							<input type="text" name="buscar_estudiante" id="buscar_estudiante" class="form-control" placeholder="Apellidos" 
+							       title="Debe seleccionar un estudiante por sus apellidos." required/>
+						</div>
+						<div class=" form-group col-sm-3">
+							<input name="buscar_estudiante_nombre" id="buscar_estudiante_nombre" class="form-control" placeholder="Nombres"/>
+						</div>
+						<div class="col-sm-2">
+							<input type="hidden" name="buscar_estudiante_id" id="buscar_estudiante_id" class="form-control" />
+						</div>
+						<div class="col-sm-3">
+							<input type="hidden" name="estudiante_email" id="estudiante_email" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="buscar_profesor" class="col-sm-2 col-form-label" th:text="'Buscar Docente'"></label>
+						<div class="col-sm-5">
+							<input type="text" name="buscar_profesor" id="buscar_profesor" class="form-control" placeholder="Apellidos" 
+								   title="Debe seleccionar un docente por sus apellidos." required/>
+						</div>
+						<div class=" form-group col-sm-3">
+							<input name="buscar_profesor_nombre" id="buscar_profesor_nombre" class="form-control" placeholder="Nombres" />
+						</div>
+						<div class="col-sm-2">
+							<input type="hidden" name="buscar_profesor_id" id="buscar_profesor_id" class="form-control" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label for="buscar_materia" class="col-sm-2 col-form-label" th:text="'Buscar Materia'"></label>
+						<div class="col-sm-5">
+							<input type="text" name="buscar_materia" id="buscar_materia" class="form-control" placeholder="Nombre" 
+								   title="Debe seleccionar una materia." required/>
+						</div>
+						<div class=" form-group col-sm-3">
+							<input name="buscar_materia_semestre" id="buscar_materia_semestre" class="form-control" placeholder="Semestre"/>						</div>
+						<div class="col-sm-6">
+							<input type="hidden" name="buscar_materia_id" id="buscar_materia_id" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="horario" class="col-sm-2 col-form-label" th:text="'Horario'"></label>
+						<div class="col-sm-5">
+							<textarea th:field="*{horario}" class="form-control" th:errorclass="'form-control alert-danger'" placeholder="e.g. Lunes 7-9" 
+									  title="El horario es requerido. Ingresar dia y hora" required></textarea>
+							<small class="form-text text-danger"
+								th:if="${#fields.hasErrors('horario')}" th:errors="*{horario}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="observacion" class="col-sm-2 col-form-label" th:text="'Observación'"></label>
+						<div class="col-sm-5">
+							<textarea th:field="*{observacion}" class="form-control" ></textarea>
+						</div>
+					</div>								
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Guardar" class="btn btn-outline-success" />
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="registro/js/autocomplete-registro :: javascript"></script>
+</body>
+</html>

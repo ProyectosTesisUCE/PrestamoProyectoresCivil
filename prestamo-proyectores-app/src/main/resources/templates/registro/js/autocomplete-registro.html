@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<script type="text/javascript" th:fragment="javascript">
+	
+	$(document).ready(function() {
+
+			$("#buscar_estudiante").autocomplete({
+
+				source : function(request, response) {
+					$.ajax({
+						url : "/registro/cargar-estudiantes/" + request.term,
+						dataType : "json",
+						data : {
+							term : request.term
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									value : item.id,
+									label : item.apellido,
+									nombre : item.nombre,
+									email : item.email,
+									cedula : item.cedula,
+								};
+							}));
+						},
+					});
+				},
+				select: function(event, ui){
+				$("#buscar_estudiante").val(ui.item.label);
+				$("#buscar_estudiante_nombre").val(ui.item.nombre);
+				$("#estudiante_email").val(ui.item.email);
+				$("#buscar_estudiante_id").val(ui.item.value);
+				return false;
+			} 
+		});
+			
+			$("#buscar_profesor").autocomplete({
+
+				source : function(request, response) {
+					$.ajax({
+						url : "/registro/cargar-profesores/" + request.term,
+						dataType : "json",
+						data : {
+							term : request.term
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									value : item.id,
+									label : item.apellido,
+									nombre : item.nombre,
+									cedula : item.cedula,
+								};
+							}));
+						},
+					});
+				},
+				select: function(event, ui){
+				$("#buscar_profesor").val(ui.item.label);
+				$("#buscar_profesor_nombre").val(ui.item.nombre);
+				$("#buscar_profesor_id").val(ui.item.value);
+				return false;
+			} 
+		});	
+			
+			$("#buscar_materia").autocomplete({
+
+				source : function(request, response) {
+					$.ajax({
+						url : "/registro/cargar-materias/" + request.term,
+						dataType : "json",
+						data : {
+							term : request.term
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									value : item.id,
+									label : item.nombre,
+									semestre : item.semestre,
+								};
+							}));
+						},
+					});
+				},
+				select: function(event, ui){
+				$("#buscar_materia").val(ui.item.label);
+				$("#buscar_materia_semestre").val(ui.item.semestre);
+				$("#buscar_materia_id").val(ui.item.value);
+				return false;
+			} 
+		});
+	}
+			
+	);
+	
+	</script>
+</body>
+</html>

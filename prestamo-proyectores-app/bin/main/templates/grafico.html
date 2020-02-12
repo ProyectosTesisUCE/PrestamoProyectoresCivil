@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+	<div class=" py-4 mx-auto" style="width: 88%;">
+		<div class="card bg-white border-primary" >
+			<div class="card-header border-primary" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body ">
+				<div class="row">
+					<div class="card p-1 mt-2 mb-4 mr-2 ml-1" style="width: 49%; height:50%;" >
+						<canvas class="card-img-top" id="pieProy" width="100" height="70"></canvas>
+					</div>
+					<div class="card p-1 mt-2 ml-1" style="width: 49%; height:50%;" >
+						<canvas class="card-img-top" id="doughnutMat" width="100" height="70"></canvas>
+					</div>
+				</div>
+				<div class="card p-2 mt-2 mb-3 mx-auto" style="width: 85%; height:100%;" >
+					<canvas class="card-img-top" id="horizontalBarEst" width="100" height="55"></canvas>
+				</div>
+<!-- 			<div class="card p-2 mt-5 mb-3 mx-auto w-75 h-100" style="width: 85%; height:100%;"   > -->
+				<div class="card p-2 mt-5 mb-3 mx-auto" style="width: 85%; height:100%;"   >
+					<canvas class="card-img-top" id="barProf" width="100" height="55"></canvas>
+				</div>
+		
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="prestamo/js/graficos :: javascriptGraficoProy"></script>
+	<script th:replace="prestamo/js/graficos :: javascriptGraficoMat"></script>
+	<script th:replace="prestamo/js/graficos :: javascriptGraficoEst"></script>
+	<script th:replace="prestamo/js/graficos :: javascriptGraficoProf"></script>
+	
+</body>
+</html>

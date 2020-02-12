@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+
+				<form th:action="@{/user/form1}" th:object="${user}"
+					method="post">
+					
+					<div class="form-group row">
+						<div class="col-sm-5">
+							<input type="hidden" th:value="${idUsuario}" name="idUsuario" id="idUsuario"class="form-control" />
+						</div>
+					</div>
+					
+					
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">UserName</label>
+						<div class="col-sm-2">
+							<input type="text" th:field="*{username}" class="form-control" disabled placeholder="e.g. juan"
+								id="userName" name="userName" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Enabled</label>
+						<div class="col-sm-2">
+						<select th:field="*{enabled}" class="form-control" disabled>
+							<option value="true">TRUE</option>
+							<option value="false">FALSE</option>
+						</select>					
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label class="col-sm-3 col-form-label">Hacer Administrador</label>
+						<div class="col-sm-2 form-check-inline">
+							<label class="form-check-label" for="userA"> <input
+								type="radio" class="form-check-input"
+								id="userA" name="userA" value="ROLE_ADMIN" >Si
+							</label>							
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-3 col-form-label">Deshabilitar Usuario</label>
+						<div class="col-sm-2 form-check-inline">
+							<label class="form-check-label" for="userDes"> <input
+								type="radio" class="form-check-input"
+								id="userDes" name="userDes" value="false" >Si
+							</label>							
+						</div>
+					</div>
+										
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Guardar"
+								class="btn btn-outline-success" />
+						</div>
+					</div>
+
+					<!-- 					<input type="hidden" th:field="*{id}" /> -->
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

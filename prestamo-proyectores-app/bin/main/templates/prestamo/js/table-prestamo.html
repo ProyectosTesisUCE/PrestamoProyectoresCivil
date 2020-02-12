@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<script type="text/javascript" th:fragment="javascriptTable">
+	
+	$(document).ready(function () {
+		  $('#tablePr').DataTable({
+		    "pagingType": "full_numbers", // "simple" option for 'Previous' and 'Next' buttons only
+		    "lengthMenu": [5, 10, 20],
+		    "language": {
+	            "lengthMenu": " _MENU_ ",// _MENU_ registros por página
+	            "zeroRecords": "Nothing found - sorry",
+	            "info": "Página _PAGE_ de _PAGES_",
+	            "infoEmpty": "No records available",
+	            "search": "Buscar",
+	            "infoFiltered": "(Filtrado de _MAX_ registros)",
+	            "paginate": {
+	                    "previous": "&laquo;",
+	                    "next": "&raquo;"
+	                  }
+	        },
+		  });
+		  $('.dataTables_length').addClass('bs-select');
+		});
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+	<div class=" py-4 mx-auto" style="width: 95%;">
+
+		<div class="card bg-white border-info table-responsive" >
+			<div class="card-header border-info" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+			
+		
+				<h4 class="card-title">
+
+					<a th:href="@{/sendHora }" class="btn btn-light btn-xs">&laquo;
+						Regresar</a> 
+					<a class="btn btn-danger btn-xs float-right mx-2"
+						th:href="@{/listadoHora (format=pdf)}">PDF</a>
+					<a class="btn btn-success btn-xs float-right"
+						th:href="@{/listadoHora (format=xlsx)}">EXCEL</a>
+				</h4>
+
+				<table id="tablePr" class="table table-striped table-bordered">
+					<thead class="thead-inverse thead-dark" style="font-size: 13px; text-align: center;">
+						<tr>
+							<th>ID</th>
+							<th>ALTA PRO.</th>
+							<th>FECHA</th>
+							<th>CARTA COMPROMISO PROF / EST</th>
+							<th>MATERIA</th>
+							<th>AULA</th>
+							<th>HORA IN.</th>
+							<th>HORA FN.</th>
+							<th>ESTADO</th>
+						</tr>
+					</thead>
+					<tbody style="font-size: 14px; text-align: center;">
+						<tr th:each="prestamo: ${prestamos}">
+							<td><a class="btn btn-outline-primary btn-sm" th:href="@{/ver2/} + ${prestamo.id}" th:text="${prestamo.id}"></a></td>
+							<td th:text="${prestamo.proyector.alta}"></td>
+							<td th:text="${#dates.format(prestamo.createPr, 'dd-MM-yyyy')}"></td>
+							<td style="font-size: 13px;" th:text="${prestamo.registro.profesor.apellido} +' '+ ${prestamo.registro.profesor.nombre} +' / '+ ${prestamo.registro.estudiante.apellido} +' '+ ${prestamo.registro.estudiante.nombre}"></td>						
+							<td th:text="${prestamo.registro.materia.nombre}"></td>
+							<td th:text="${prestamo.aula}"></td>
+							<td th:text="${prestamo.horaIn}"></td>
+							<td th:text="${prestamo.horaFn}"></td>								
+							
+							<td >
+								<span th:if="${prestamo.estado == 'Terminado'}"  class="badge badge-success">Terminado</span>
+								<span th:unless="${prestamo.estado == 'Terminado'}"  class="badge badge-danger" >Activo</span>
+							</td>								
+						</tr>
+
+					</tbody>
+
+				</table>
+				
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="prestamo/js/table-prestamo :: javascriptTable"></script>
+	
+</body>
+</html>

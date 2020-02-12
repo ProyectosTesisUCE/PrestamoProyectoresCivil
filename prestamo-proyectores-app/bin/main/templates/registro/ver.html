@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> -->
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<a th:href="@{/registro/listar }" class="btn btn-light btn-xs">&laquo;
+						Regresar</a> <a class="btn btn-danger btn-xs float-right"
+						th:href="@{'/registro/ver/' + ${registro.id}(format=pdf)}">PDF</a>
+
+				</h4>
+
+				<ul class="list-group my-2">
+					<li class="list-group-item list-group-item-primary "
+						th:text="${registro.descripcion}"></li>
+					<li class="list-group-item"
+						th:text="'Fecha de Registro: ' + ${#dates.format( registro.createRe, 'dd-MM-yyyy')}"></li>
+					<li class="list-group-item"
+						th:text="'Estudiante: ' + ${registro.estudiante.nombre} +' '+ ${registro.estudiante.apellido}"></li>
+					<li class="list-group-item"
+						th:text="'Docente: ' + ${registro.profesor.nombre} +' '+ ${registro.profesor.apellido}"></li>
+					<li class="list-group-item"
+						th:text="'Materia: ' + ${registro.materia.nombre}"></li>
+					<li class="list-group-item"
+						th:text="'Horario: ' + ${registro.horario}"></li>
+
+					<li class="list-group-item" >
+						<span th:if="${registro.estado == 'Activo'}"  class="badge badge-success">Activo</span>
+						<span th:unless="${registro.estado == 'Activo'}"  class="badge badge-danger" >Inactivo</span>
+					</li>
+				</ul>
+				<div class="card border-info mb-4" style="max-width: 20rem;">
+					<div class="card-header">Observaciones</div>
+					<div class="card-body">
+						<p class="card-text" th:text="${registro.observacion}"
+							th:if="${not #strings.isEmpty(registro.observacion)}"></p>
+						<h4 class="card-title"
+							th:if="${#strings.isEmpty(registro.observacion)}"
+							th:text="'No tiene observaciones'"></h4>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

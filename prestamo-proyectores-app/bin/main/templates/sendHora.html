@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+
+	<div class="container py-4">
+
+		<div class="card bg-white border-info table-responsive" >
+			<div class="card-header border-info" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+			
+				<form th:action="@{/sendHora}" >
+					<div class="form-group row">
+						<label for="fecha" class="col-sm-1 col-form-label">Fecha: </label>
+						<div class="col-sm-2">
+							<input id="fecha" th:value="${fecha}" type="text" th:name="fecha" class="form-control" /> 
+						</div>
+						<label for="horaIn" class="col-sm-1 col-form-label">Hora In: </label>
+						<div class="col-sm-2">
+							<input id="horaIn" th:value="${horaIn}" type="text" th:name="horaIn" class="form-control" /> 
+						</div>
+						<label for="horaFn" class="col-sm-1 col-form-label">Hora Fn: </label>
+						<div class="col-sm-2">
+							<input id="horaFn" th:value="${horaFn}" type="text" th:name="horaFn" class="form-control" /> 
+						</div>
+						<div class="col-sm-1">
+							<input type="submit"  value="Send" class="btn btn-outline-success" />
+						</div>
+						<div class="col-sm-2">
+							<a class="btn btn-outline-primary" th:href="@{/listadoHora}">Ver Reporte</a>
+						</div>
+					</div>
+				
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="prestamo/js/table-prestamo :: javascriptTable"></script>
+	<script>
+      $(function () {
+          $("#fecha").datepicker({dateFormat: 'yy-mm-dd'});
+        }
+      );
+      var input = $('#horaIn').clockpicker({
+  	    placement: 'bottom',
+  	    align: 'left',
+  	    'default': 'now',
+//   	    autoclose: true,
+  	    donetext: 'Done'
+  		});	
+   	  var input = $('#horaFn').clockpicker({
+	    placement: 'bottom',
+	    align: 'left',
+// 	    autoclose: true,
+	    'default': 'now',
+	 	donetext: 'Done'
+   		});	
+    </script>
+
+</body>
+</html>

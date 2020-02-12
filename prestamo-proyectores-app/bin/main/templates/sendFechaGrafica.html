@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+	<div class=" py-4 mx-auto" style="width: 88%;">
+		<div class="card bg-white border-primary" >
+			<div class="card-header border-primary" th:text="${titulo}" style="font-size: 16px; font-style: oblique; font-weight: 600;"></div>
+			<div class="card-body">
+			
+				<form th:action="@{/sendFechaGrafica}" >
+					<div class="form-group row">
+						<label for="startDate" class="col-sm-1 col-form-label">Desde: </label>
+						<div class="col-sm-2">
+							<input id="startDate" th:value="${startDate}" type="text" th:name="startDate" class="form-control" /> 
+						</div>
+						<label for="endDate" class="col-sm-1 col-form-label">Hasta: </label>
+						<div class="col-sm-2">
+							<input id="endDate" th:value="${endDate}" type="text" th:name="endDate" class="form-control" /> 
+						</div>
+						<div class="col-sm-1">
+							<input type="submit"  value="Send" class="btn btn-outline-success" />
+						</div>
+					</div>
+				
+				</form>
+
+				<div class="row">
+					<div class="card p-1 mt-2 mb-4 mr-2 ml-1 " style="width: 49%; height:50%;" >
+						<canvas class="card-img-top" id="pieProy" width="100" height="70"></canvas>
+					</div>
+					<div class="card p-1 mt-2 ml-1" style="width: 49%; height:50%;" >
+						<canvas class="card-img-top" id="doughnutMat" width="100" height="70"></canvas>
+					</div>
+				</div>
+				<div class="card p-2 mt-2 mb-3 mx-auto" style="width: 85%; height:100%;">
+					<canvas class="card-img-top" id="horizontalBarEst" width="100" height="55"></canvas>
+				</div>
+				<div class="card p-2 mt-5 mb-3 mx-auto h-100" style="width: 85%;">
+					<canvas class="card-img-top" id="barProf" width="100" height="55"></canvas>
+				</div>				
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="prestamo/js/graficos :: javascriptGraficoProyDate"></script>
+	<script th:replace="prestamo/js/graficos :: javascriptGraficoMatDate"></script>
+	<script th:replace="prestamo/js/graficos :: javascriptGraficoEstDate"></script>
+	<script th:replace="prestamo/js/graficos :: javascriptGraficoProfDate"></script>
+	
+	<script>
+      $(function () {
+          $("#startDate").datepicker({dateFormat: 'yy-mm-dd'});
+          $("#endDate").datepicker({dateFormat: 'yy-mm-dd'});
+        }
+      );
+    </script>
+
+</body>
+</html>

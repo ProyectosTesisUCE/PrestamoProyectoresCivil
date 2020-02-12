@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<script type="text/javascript" th:fragment="javascript">
+	
+	$(document).ready(function() {
+
+			$("#buscar_registro").autocomplete({
+
+				source : function(request, response) {
+					$.ajax({
+						url : "/cargar-registros/" + request.term,
+						dataType : "json",
+						data : {
+							term : request.term
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									value : item.id,
+									label : item.descripcion,
+									emailEs : item.emailEs,
+									horario : item.horario,
+								};
+							}));
+						},
+					});
+				},
+				select: function(event, ui){
+				$("#buscar_registro").val(ui.item.label);
+				$("#buscar_registro_id").val(ui.item.value);
+				$("#registro_horario").val(ui.item.horario);
+				$("#registro_emailEs").val(ui.item.emailEs);
+				return false;
+			} 
+		});
+			
+			$("#buscar_proyector").autocomplete({
+
+				source : function(request, response) {
+					$.ajax({
+						url : "/cargar-proyectores/" + request.term,
+						dataType : "json",
+						data : {
+							term : request.term
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									value : item.id,
+									label : item.alta,
+									marca : item.marca,
+								};
+							}));
+						},
+					});
+				},
+				select: function(event, ui){
+				$("#buscar_proyector").val(ui.item.label);
+				$("#buscar_proyector_marca").val(ui.item.marca);
+				$("#buscar_proyector_id").val(ui.item.value);
+				return false;
+			} 
+		});	
+			
+	}
+			
+	);
+	
+	</script>
+</body>
+</html>
